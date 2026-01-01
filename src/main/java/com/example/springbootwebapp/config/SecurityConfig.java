@@ -50,7 +50,7 @@ public class SecurityConfig {
                 .ignoringRequestMatchers("/h2-console/**")
             )
             .headers(headers -> headers
-                .frameOptions().sameOrigin()
+                .frameOptions(frameOptions -> frameOptions.sameOrigin())
             );
         
         return http.build();
@@ -63,8 +63,7 @@ public class SecurityConfig {
     
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService);
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
