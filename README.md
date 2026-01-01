@@ -45,7 +45,7 @@ A full-featured Spring Boot web application with user registration, authenticati
 1. **Clone the repository**
    ```bash
    git clone <your-repo-url>
-   cd demo
+   cd SpringBootWebApp
    ```
 
 2. **Build and run with Docker Compose**
@@ -74,7 +74,7 @@ A full-featured Spring Boot web application with user registration, authenticati
 
 3. **Run the application**
    ```bash
-   java -jar target/demo-0.0.1-SNAPSHOT.war
+   java -jar target/springbootwebapp-0.0.1-SNAPSHOT.war
    ```
 
 4. **Access the application**
@@ -154,24 +154,64 @@ CREATE TABLE users (
 
 ## CI/CD Pipeline
 
-The project includes a GitHub Actions workflow that:
+**Status**: GitHub Actions workflow is implemented and configured.
+
+The CI/CD pipeline automatically:
 
 1. **Runs tests** on every push and pull request
-2. **Builds Docker image** on successful tests
-3. **Pushes to Docker Hub** (requires secrets configuration)
-4. **Optional deployment** to cloud provider
+2. **Builds Docker image** after successful tests
+3. **Pushes to Docker Hub** on push to main/master branches
+4. **Fails the build** if any tests fail
 
-### Setting up GitHub Actions
+### Workflow Details
 
-1. Add secrets to your GitHub repository:
-   - `DOCKER_USERNAME`: Your Docker Hub username
-   - `DOCKER_PASSWORD`: Your Docker Hub password/token
+The pipeline consists of two jobs:
 
-2. The workflow will automatically trigger on push to main/master branch
+**Test Job:**
+- Triggers on every push and pull request
+- Sets up JDK 21 with Maven caching
+- Runs all unit and integration tests
+- Generates and uploads test reports
+- Runs on all branches
 
-## Deployment Options
+**Build-and-Push Job:**
+- Only runs after tests pass
+- Only triggers on push to main/master branches
+- Uses Docker Buildx for optimized builds
+- Tags images with `latest` and commit SHA
+- Implements layer caching for faster builds
+- Pushes to Docker Hub registry
 
-### Heroku
+### Setup Instructions
+
+To enable the workflow, add these secrets to your GitHub repository (Settings → Secrets and variables → Actions):
+
+- `DOCKER_USERNAME`: Your Docker Hub username
+- `DOCKER_PASSWORD`: Your Docker Hub access token (not your password)
+
+**How to create a Docker Hub access token:**
+1. Log in to Docker Hub
+2. Go to Account Settings → Security
+3. Click "New Access Token"
+4. Give it a name and copy the token
+5. Add it to GitHub secrets as `DOCKER_PASSWORD`
+
+### Viewing Workflow Results
+
+- **Actions Tab**: View all workflow runs in the GitHub Actions tab
+- **Pull Requests**: See test status checks before merging
+- **Commits**: Each commit shows the workflow status
+- **Docker Hub**: Check your Docker Hub repository for pushed images
+
+## Deployment
+
+**Status**: Application is not yet deployed to a cloud provider.
+
+### Deployment Options
+
+The application can be deployed to various cloud providers:
+
+#### Option 1: Heroku
 ```bash
 # Login to Heroku
 heroku login
@@ -186,30 +226,74 @@ heroku addons:create heroku-postgresql:hobby-dev
 git push heroku main
 ```
 
-### Google Cloud Run
+#### Option 2: Google Cloud Run
 ```bash
-# Build and push to Google Container Registry
-gcloud builds submit --tag gcr.io/PROJECT_ID/spring-boot-app
+# Authenticate
+gcloud auth login
 
-# Deploy to Cloud Run
-gcloud run deploy spring-boot-app \
-  --image gcr.io/PROJECT_ID/spring-boot-app \
+# Set project
+gcloud config set project PROJECT_ID
+
+# Build and push to Google Container Registry
+gcloud builds submit --tag gcr.io/PROJECT_ID/spring-boot-webapp
+
+# Deploy to Cloud Run with PostgreSQL Cloud SQL
+gcloud run deploy spring-boot-webapp \
+  --image gcr.io/PROJECT_ID/spring-boot-webapp \
   --platform managed \
   --region us-central1 \
-  --allow-unauthenticated
+  --allow-unauthenticated \
+  --set-env-vars DB_HOST=your-cloud-sql-host,DB_NAME=userdb,DB_USER=postgres,DB_PASSWORD=your-password
 ```
 
-### AWS Elastic Beanstalk
+#### Option 3: AWS Elastic Beanstalk
 ```bash
-# Initialize EB CLI
-eb init -p docker spring-boot-app
+# Install EB CLI
+pip install awsebcli
 
-# Create environment
-eb create spring-boot-env
+# Initialize
+eb init -p docker spring-boot-webapp --region us-east-1
+
+# Create environment with RDS
+eb create spring-boot-env --database
 
 # Deploy
 eb deploy
 ```
+
+#### Option 4: Azure Container Apps
+```bash
+# Login to Azure
+az login
+
+# Create resource group
+az group create --name spring-boot-rg --location eastus
+
+# Create container registry
+az acr create --resource-group spring-boot-rg --name yourregistry --sku Basic
+
+# Build and push image
+az acr build --registry yourregistry --image spring-boot-webapp:latest .
+
+# Deploy to Container Apps
+az containerapp up \
+  --name spring-boot-webapp \
+  --resource-group spring-boot-rg \
+  --image yourregistry.azurecr.io/spring-boot-webapp:latest \
+  --target-port 8080 \
+  --ingress external
+```
+
+### Deployment Log
+
+**Status**: Not yet deployed
+
+*To be updated once deployment is completed with:*
+- Cloud provider chosen
+- Deployment date
+- Application URL
+- Database configuration steps
+- Any issues encountered and resolutions
 
 ## Development
 
