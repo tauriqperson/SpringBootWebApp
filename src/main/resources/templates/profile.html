@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <h2>User Management</h2>
+            <div>
+                <span sec:authentication="name"></span>
+                <span sec:authorize="hasRole('ADMIN')" class="badge">ADMIN</span>
+                <a th:href="@{/profile}" class="btn btn-sm">Profile</a>
+                <a sec:authorize="hasRole('ADMIN')" th:href="@{/admin/dashboard}" class="btn btn-sm">Admin</a>
+                <form th:action="@{/logout}" method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-sm btn-danger">Logout</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="profile-container">
+            <h1>My Profile</h1>
+            
+            <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
+            <div th:if="${errorMessage}" class="alert alert-error" th:text="${errorMessage}"></div>
+            
+            <div class="profile-info">
+                <h2>Current Information</h2>
+                <p><strong>Username:</strong> <span th:text="${user.username}"></span> (cannot be changed)</p>
+                <p><strong>Email:</strong> <span th:text="${user.email}"></span></p>
+                <p><strong>Full Name:</strong> <span th:text="${user.fullName}"></span></p>
+                <p><strong>Role:</strong> <span th:text="${user.role}"></span></p>
+            </div>
+            
+            <div class="form-container">
+                <h2>Update Profile</h2>
+                <form th:action="@{/profile/update}" th:object="${profileUpdateRequest}" method="post">
+                    <div class="form-group">
+                        <label for="fullName">Full Name:</label>
+                        <input type="text" id="fullName" th:field="*{fullName}" required>
+                        <span class="error" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" th:field="*{email}" required>
+                        <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Update Profile</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
