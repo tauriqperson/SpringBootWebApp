@@ -1,0 +1,16 @@
+com/example/springbootwebapp/model/Role.class
+com/example/springbootwebapp/dto/RegisterRequest.class
+com/example/springbootwebapp/config/DataInitializer.class
+com/example/springbootwebapp/service/CustomUserDetailsService.class
+com/example/springbootwebapp/config/SecurityConfig.class
+com/example/springbootwebapp/repository/UserRepository.class
+com/example/springbootwebapp/controller/ProfileController.class
+com/example/springbootwebapp/model/User.class
+com/example/springbootwebapp/SpringBootWebAppApplication.class
+com/example/springbootwebapp/controller/AdminController.class
+com/example/springbootwebapp/dto/ProfileUpdateRequest.class
+com/example/springbootwebapp/controller/AuthController.class
+com/example/springbootwebapp/ServletInitializer.class
+com/example/springbootwebapp/dto/UserResponse.class
+com/example/springbootwebapp/controller/HomeController.class
+com/example/springbootwebapp/service/UserService.class

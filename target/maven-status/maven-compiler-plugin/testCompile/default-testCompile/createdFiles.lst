@@ -1,0 +1,4 @@
+com/example/springbootwebapp/service/UserServiceTest.class
+com/example/springbootwebapp/controller/ProfileControllerTest.class
+com/example/springbootwebapp/SpringBootWebAppApplicationTests.class
+com/example/springbootwebapp/controller/AuthControllerTest.class

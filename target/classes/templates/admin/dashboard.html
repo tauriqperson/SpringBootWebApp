@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <h2>Admin Dashboard</h2>
+            <div>
+                <span sec:authentication="name"></span>
+                <span class="badge">ADMIN</span>
+                <a th:href="@{/profile}" class="btn btn-sm">Profile</a>
+                <a th:href="@{/admin/users}" class="btn btn-sm">All Users</a>
+                <form th:action="@{/logout}" method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-sm btn-danger">Logout</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="dashboard">
+            <h1>Admin Dashboard</h1>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>Total Users</h3>
+                    <p class="stat-number" th:text="${userCount}"></p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Recent Users</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Full Name</th>
+                            <th>Role</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="user : ${users}">
+                            <td th:text="${user.id}"></td>
+                            <td th:text="${user.username}"></td>
+                            <td th:text="${user.email}"></td>
+                            <td th:text="${user.fullName}"></td>
+                            <td><span class="badge" th:text="${user.role}"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

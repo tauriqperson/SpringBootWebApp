@@ -1,0 +1,16 @@
+/Users/TauriqKariem/dev/Umuzi/SpringBootWebApp/src/main/java/com/example/springbootwebapp/ServletInitializer.java
+/Users/TauriqKariem/dev/Umuzi/SpringBootWebApp/src/main/java/com/example/springbootwebapp/SpringBootWebAppApplication.java
+/Users/TauriqKariem/dev/Umuzi/SpringBootWebApp/src/main/java/com/example/springbootwebapp/config/DataInitializer.java
+/Users/TauriqKariem/dev/Umuzi/SpringBootWebApp/src/main/java/com/example/springbootwebapp/config/SecurityConfig.java
+/Users/TauriqKariem/dev/Umuzi/SpringBootWebApp/src/main/java/com/example/springbootwebapp/controller/AdminController.java
+/Users/TauriqKariem/dev/Umuzi/SpringBootWebApp/src/main/java/com/example/springbootwebapp/controller/AuthController.java
+/Users/TauriqKariem/dev/Umuzi/SpringBootWebApp/src/main/java/com/example/springbootwebapp/controller/HomeController.java
+/Users/TauriqKariem/dev/Umuzi/SpringBootWebApp/src/main/java/com/example/springbootwebapp/controller/ProfileController.java
+/Users/TauriqKariem/dev/Umuzi/SpringBootWebApp/src/main/java/com/example/springbootwebapp/dto/ProfileUpdateRequest.java
+/Users/TauriqKariem/dev/Umuzi/SpringBootWebApp/src/main/java/com/example/springbootwebapp/dto/RegisterRequest.java
+/Users/TauriqKariem/dev/Umuzi/SpringBootWebApp/src/main/java/com/example/springbootwebapp/dto/UserResponse.java
+/Users/TauriqKariem/dev/Umuzi/SpringBootWebApp/src/main/java/com/example/springbootwebapp/model/Role.java
+/Users/TauriqKariem/dev/Umuzi/SpringBootWebApp/src/main/java/com/example/springbootwebapp/model/User.java
+/Users/TauriqKariem/dev/Umuzi/SpringBootWebApp/src/main/java/com/example/springbootwebapp/repository/UserRepository.java
+/Users/TauriqKariem/dev/Umuzi/SpringBootWebApp/src/main/java/com/example/springbootwebapp/service/CustomUserDetailsService.java
+/Users/TauriqKariem/dev/Umuzi/SpringBootWebApp/src/main/java/com/example/springbootwebapp/service/UserService.java

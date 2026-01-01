@@ -3,7 +3,7 @@ package com.example.springbootwebapp;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+@SpringBootTest(classes = SpringBootWebAppApplication.class)
 class SpringBootWebAppApplicationTests {
 
 	@Test

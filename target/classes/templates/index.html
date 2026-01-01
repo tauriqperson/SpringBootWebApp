@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Spring Boot User Management</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <h1>Welcome to User Management System</h1>
+            <p>A Spring Boot web application with user registration, authentication, and role-based access control.</p>
+            
+            <div class="button-group">
+                <a th:href="@{/login}" class="btn btn-primary">Login</a>
+                <a th:href="@{/register}" class="btn btn-secondary">Register</a>
+            </div>
+            
+            <div class="features">
+                <h2>Features</h2>
+                <ul>
+                    <li>User Registration and Authentication</li>
+                    <li>Profile Management</li>
+                    <li>Role-based Access Control (Admin & User)</li>
+                    <li>Secure Password Hashing with BCrypt</li>
+                    <li>Session Management</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -33,10 +33,12 @@ A full-featured Spring Boot web application with user registration, authenticati
 
 ## Prerequisites
 
-- Java 21 or higher
+- **Java 21** (Required - Java 25 is not yet supported by Spring Boot dependencies)
 - Maven 3.9+
 - Docker and Docker Compose (for containerized deployment)
 - PostgreSQL (if running without Docker)
+
+**Important**: This project requires **Java 21 exactly**. Java 25 will cause test failures due to Byte Buddy/Mockito compatibility issues. Docker uses Java 21 automatically.
 
 ## Getting Started
 
